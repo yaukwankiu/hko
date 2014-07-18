@@ -116,6 +116,7 @@ class Charts(object):
 
     def fetchSingle(self):
         url = self.urlPattern
+        fileSuffix     = url[-3:]
         outputFolder = self.name + '/'
         Y, M, D, h, m, s = getCurrentTime()
         fileName = ("0000"+str(Y))[-4:] + ("00"+str(M))[-2:] + ("00"+str(D))[-2:] + ("00"+str(h))[-2:] + ("00"+str(m))[-2:] + "." + fileSuffix
