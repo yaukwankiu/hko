@@ -1,0 +1,1 @@
+http://www.hko.gov.hk/wxinfo/ts/webcam/ani_SWH_photo_e.htm

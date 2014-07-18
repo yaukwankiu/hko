@@ -114,7 +114,7 @@ class Charts(object):
                         except:
                             print fileName, "not found!!!!"
                             returnValue = 0
-                            return returnValue
+                            #return returnValue
             print "%d images fetched " %count + " in folder" + outputFolder
             return count
 
