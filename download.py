@@ -56,7 +56,8 @@ class Charts(object):
 
         if not os.path.exists(dataFolder):
             os.makedirs(dataFolder)
-        open(dataFolder+'readme.txt','w').write(description)
+        if not os.path.exists(dataFolder+'readme.txt'):
+            open(dataFolder+'readme.txt','w').write(description)
 
 
     def fetch(self, days=4,reload=False, *args, **kwargs):
