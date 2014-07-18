@@ -192,12 +192,7 @@ def getObjects():
                     description = "Minimum Air Temperature Recorded since 00:00",
                     )
 
-    tempehk = Charts(name='tempehk',
-                    urlPattern='http://www.hko.gov.hk/wxinfo/ts/temp/tempehk.png',
-                    timed = False,
-                    description = "Air Temperature Hong Kong"
-                    )
-
+c
     maxiehk_1 = Charts(name='maxiehk_1',
                     urlPattern='http://www.hko.gov.hk/wxinfo/ts/temp/maxiehk-1.png',
                     timed = False,
@@ -245,12 +240,22 @@ def getObjects():
 
 
     ### photos#######
-       
+    photoNameList = ['lfs', 'wlp', 'kfb','tpk', 'sk2', 'tlc', 'klt', 'hk2', 'hko', 'swh', 'gsi', 'cp1', 'slw', 'dnl', 'pe2', 'cch', 'wgl', 'wl2', 'lam', 'cce']
+    photoList  = []
+    for p in photoNameList:
+        photo  = Charts(name=p,
+                       urlPattern='http://www.hko.gov.hk/wxinfo/aws/hko_mica/%s/latest_%s.jpg' %(p.lower(), p.upper()),
+                       timed = True,
+                       interval=5,
+                       description = "http://www.hko.gov.hk/wxinfo/ts/webcam/ani_%s_photo_e.htm" %p.upper(),
+                       )
+        photoList.append(p)
+
                     
     L0=[rad256, rad128, rad064, rad3d040]
 
     L1=[tempehk,humidehk,miniehk, tempehk, maxiehk_1,grassehk,   windehk,  gustehk , gustehk ,  visehk ,  preehk, vismape  ]
-    return L0+L1
+    return L0 + L1 + photoList
 
 def main(key1=""):
     L = getObjects()
