@@ -43,6 +43,7 @@ class Charts(object):
                  interval=12,   #unit:  minutes
                  description="",
                  timed=True,
+                 useDoubleDigitYear=False,
                  ):
         #   open dataFolder
         dataFolder = name + '/'
@@ -52,13 +53,13 @@ class Charts(object):
         self.urlPattern     = urlPattern
         self.interval       = interval
         self.description    = description
+        self.timed          =timed
 
-
-    def fetch(self, days=4,reload=True):
+    def fetch(self, days=4,reload=False, *args, **kwargs):
         fileSuffix     = self.urlPattern[-3:]
         count           = 0
         dataFolder  = self.name+'/'
-        if not timed:
+        if not self.timed:
             return self.fetchSingle()
         else:
             for dD in range(-4,1):
@@ -74,7 +75,10 @@ class Charts(object):
                 # get the url
                     url             = self.urlPattern
                     Y1, M1, D1, h1, m1, s1 = getDatetime(datetime.datetime(Y,M,D,0,0,0) + datetime.timedelta(1.*minute  / 1440))
-                    pairs = [('YYYY', Y1), ('MM',M1), ('DD',D1), ('hh',h1), ('mm',m1)]
+                    if useDoubleDigitYear:
+                        pairs = [('YY', Y1%100), ('MM',M1), ('DD',D1), ('hh',h1), ('mm',m1)]
+                    else:
+                        pairs = [('YYYY', Y1), ('MM',M1), ('DD',D1), ('hh',h1), ('mm',m1)]
                     for pair in pairs:
                         try:
                             ###  http://www.hko.gov.hk/wxinfo/radars/rad_256_png/2d256radar_201407151424.png
@@ -192,7 +196,7 @@ def getObjects():
                     description = "Minimum Air Temperature Recorded since 00:00",
                     )
 
-c
+
     maxiehk_1 = Charts(name='maxiehk_1',
                     urlPattern='http://www.hko.gov.hk/wxinfo/ts/temp/maxiehk-1.png',
                     timed = False,
@@ -248,8 +252,9 @@ c
                        timed = True,
                        interval=5,
                        description = "http://www.hko.gov.hk/wxinfo/ts/webcam/ani_%s_photo_e.htm" %p.upper(),
+                       useDoubleDigitYear=True
                        )
-        photoList.append(p)
+        photoList.append(photo)
 
                     
     L0=[rad256, rad128, rad064, rad3d040]
@@ -257,7 +262,7 @@ c
     L1=[tempehk,humidehk,miniehk, tempehk, maxiehk_1,grassehk,   windehk,  gustehk , gustehk ,  visehk ,  preehk, vismape  ]
     return L0 + L1 + photoList
 
-def main(key1=""):
+def main(key1="", *args, **kwargs):
     L = getObjects()
     L = [v for v in L if key1 in v.name]
     print '\n'.join([v.name for v in L])
@@ -267,6 +272,7 @@ def main(key1=""):
     
     
 if __name__=="__main__":
-    key1 = sys.argv[1]
-    print 'key1=',key1
-    main(key1=key1)    
+    if len(sys.argv)>1:
+        key1 = sys.argv[1]
+        print 'key1=',key1
+    main(*sys.argv[1:])    
