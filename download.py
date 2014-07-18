@@ -47,14 +47,18 @@ class Charts(object):
                  ):
         #   open dataFolder
         dataFolder = name + '/'
-        if not os.path.exists(dataFolder):
-            os.makedirs(dataFolder)
         self.name           = name
         self.urlPattern     = urlPattern
         self.interval       = interval
         self.description    = description
         self.timed          =timed
         self.useDoubleDigitYear= useDoubleDigitYear
+
+        if not os.path.exists(dataFolder):
+            os.makedirs(dataFolder)
+        open(dataFolder+'readme.txt','w').write(description)
+
+
     def fetch(self, days=4,reload=False, *args, **kwargs):
         fileSuffix     = self.urlPattern[-3:]
         count           = 0
