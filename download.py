@@ -249,7 +249,10 @@ def getObjects():
     photoList  = []
     for p in photoNameList:
         photo  = Charts(name=p,
-                       urlPattern='http://www.hko.gov.hk/wxinfo/aws/hko_mica/%s/latest_%s.jpg' %(p.lower(), p.upper()),
+                       #urlPattern='http://www.hko.gov.hk/wxinfo/aws/hko_mica/%s/latest_%s.jpg' %(p.lower(), p.upper()),
+                       # http://www.hko.gov.hk/wxinfo/aws/hko_mica/wlp/imgWLP_140718_1445.jpg
+                       
+                       urlPattern='http://www.hko.gov.hk/wxinfo/aws/hko_mica/%s/img%s_YYMMDD_hhmm.jpg' %(p.lower(), p.upper()),
                        timed = True,
                        interval=5,
                        description = "http://www.hko.gov.hk/wxinfo/ts/webcam/ani_%s_photo_e.htm" %p.upper(),
