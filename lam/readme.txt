@@ -1,1 +1,0 @@
-http://www.hko.gov.hk/wxinfo/ts/webcam/ani_LAM_photo_e.htm

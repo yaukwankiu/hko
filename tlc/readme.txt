@@ -1,1 +1,0 @@
-http://www.hko.gov.hk/wxinfo/ts/webcam/ani_TLC_photo_e.htm

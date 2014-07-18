@@ -1,1 +1,0 @@
-Rainfall for the past hour
