@@ -54,7 +54,7 @@ class Charts(object):
         self.interval       = interval
         self.description    = description
         self.timed          =timed
-
+        self.useDoubleDigitYear= useDoubleDigitYear
     def fetch(self, days=4,reload=False, *args, **kwargs):
         fileSuffix     = self.urlPattern[-3:]
         count           = 0
@@ -75,7 +75,7 @@ class Charts(object):
                 # get the url
                     url             = self.urlPattern
                     Y1, M1, D1, h1, m1, s1 = getDatetime(datetime.datetime(Y,M,D,0,0,0) + datetime.timedelta(1.*minute  / 1440))
-                    if useDoubleDigitYear:
+                    if self.useDoubleDigitYear:
                         pairs = [('YY', Y1%100), ('MM',M1), ('DD',D1), ('hh',h1), ('mm',m1)]
                     else:
                         pairs = [('YYYY', Y1), ('MM',M1), ('DD',D1), ('hh',h1), ('mm',m1)]
@@ -94,22 +94,22 @@ class Charts(object):
                     to_path = outputFolder + self.name + "_" + fileName
                     if os.path.isfile(to_path) and reload==False:
                         print to_path, ' <--- already exists!!'
-    
-                    #   try to fetch the data
-                    try:    
-                        webpage = urllib.urlretrieve(url, to_path)
-                        if os.path.getsize(to_path)<2000:
-                            os.remove(to_path)
-                            print "file broken!", url
-                            returnValue = 0.5
-                        else:
-                            print url, " - fetched!!!!!!!!!!"
-                            returnValue=1
-                            count+=1
-                    except:
-                        print fileName, "not found!!!!"
-                        returnValue = 0
-                        return returnValue
+                    else:
+                        #   try to fetch the data
+                        try:    
+                            webpage = urllib.urlretrieve(url, to_path)
+                            if os.path.getsize(to_path)<2000:
+                                os.remove(to_path)
+                                print "file broken!", url
+                                returnValue = 0.5
+                            else:
+                                print url, " - fetched!!!!!!!!!!"
+                                returnValue=1
+                                count+=1
+                        except:
+                            print fileName, "not found!!!!"
+                            returnValue = 0
+                            return returnValue
             print "%d images fetched " %count + " in folder" + outputFolder
             return count
 
