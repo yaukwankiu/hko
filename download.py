@@ -67,7 +67,7 @@ class Charts(object):
         if not self.timed:
             return self.fetchSingle()
         else:
-            for dD in range(-4,1):
+            for dD in range(-days+1,1):  # if days=3:  the day before(-2), yesterday(-1), today(0)
                 #   compute the date
                 Y, M, D, h, m, s = getDatetime(dD=dD)
                 print "Y, M, D, h, m, s =",Y, M, D, h, m, s
