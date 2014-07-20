@@ -284,4 +284,6 @@ if __name__=="__main__":
     if len(sys.argv)>1:
         key1 = sys.argv[1]
         print 'key1=',key1
+        print "sleeping 2 seconds"
+        time.sleep(2)
     main(*sys.argv[1:])    
