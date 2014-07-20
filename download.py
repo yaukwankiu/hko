@@ -60,8 +60,8 @@ class Charts(object):
             open(dataFolder+'readme.txt','w').write(description)
 
 
-    def fetch(self, days=4,reload=False, *args, **kwargs):
-        days = int(days)
+    def fetch(self, days=3,reload=False, *args, **kwargs):
+        days= int(days)
         fileSuffix     = self.urlPattern[-3:]
         count           = 0
         dataFolder  = self.name+'/'
@@ -120,7 +120,7 @@ class Charts(object):
             return count
 
 
-    def fetchSingle(self):
+    def fetchSingle(self, *args, **kwargs):
         url = self.urlPattern
         fileSuffix     = url[-3:]
         outputFolder = self.name + '/'
