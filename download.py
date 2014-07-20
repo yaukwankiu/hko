@@ -277,7 +277,7 @@ def main(key1="", *args, **kwargs):
     print '\n'.join([v.name for v in L])
     time.sleep(2)
     for charts in L:
-        charts.fetch()
+        charts.fetch(*args, **kwargs)
     
     
 if __name__=="__main__":
