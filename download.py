@@ -286,7 +286,7 @@ if __name__=="__main__":
         print 'key1=',key1
     if len(sys.argv)>2:
         days = sys.argv[2]
-        print 'No. of days=' , days
+        print 'Number. of days fetched=' , days
     print "sleeping 2 seconds"
     time.sleep(2)
     main(*sys.argv[1:])    
