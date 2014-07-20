@@ -61,6 +61,7 @@ class Charts(object):
 
 
     def fetch(self, days=4,reload=False, *args, **kwargs):
+        days = int(days)
         fileSuffix     = self.urlPattern[-3:]
         count           = 0
         dataFolder  = self.name+'/'
