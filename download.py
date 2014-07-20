@@ -141,6 +141,19 @@ class Charts(object):
             print fileName, "not found!!!!"
             returnValue = 0
         return returnValue
+
+    def readme(self, toSaveToFile=False, saveMode='a'):
+        description = self.description
+        readmeString = description + '\n'
+        urls = re.findall(r'http.+htm', description)
+        for url in urls:
+            x = urllib2.urlopen(url).read()
+            #<meta name="Description" content="Animated Photo at Cheung Chau Sacred Heart School " />
+            readmeString += re.findall(r'(?<=\<meta name\=\"Description\" content\=\").+(?=\" \/\>)', x)[0] + '\n'
+        print readmeString
+        if toSaveToFile:
+            open(root + self.name + '/readme.txt', saveMode).write(readmeString)
+        return readmeString
 ######################################################
 #   main loop
 
