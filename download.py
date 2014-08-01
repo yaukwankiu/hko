@@ -21,12 +21,15 @@ def getCurrentTime():
     t0   = time.localtime()
     return t0.tm_year, t0.tm_mon, t0.tm_mday, t0.tm_hour, t0.tm_min, t0.tm_sec
 
-def getDatetime(dY=0, dM=0, dD=0 ,dh=0, dm=0, ds=0):
-    if isinstance(dY, datetime.datetime):
-        T = dY
+def getDatetime(dD=0 ,dh=0, dm=0, ds=0):
+
+    if isinstance(dD, datetime.datetime):   # fail-safe
+        T = dD
     else:
         Y, M, D, h, m, s = getCurrentTime()
-        T = datetime.datetime(Y+dY,M+dM,D+dD,h+dh,m+dm,s+ds)
+        dT = datetime.timedelta(dD + 1./24 * dh + 1./1440 * dm + 1./86400*ds)
+        T = datetime.datetime(Y,M,D,h,m,s)
+        T   += dT
     return T.year, T.month, T.day, T.hour, T.minute,T.second
     
 ######################################
