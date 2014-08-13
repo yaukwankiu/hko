@@ -288,6 +288,11 @@ def getObjects():
     L1=[tempehk,humidehk,miniehk, tempehk, maxiehk_1,grassehk,   windehk,  gustehk , gustehk ,  visehk ,  preehk, vismape  ]
     return L0 + L1 + photoList
 
+def constructReadMes():
+    L = getObjects()
+    for v in L:
+        v.readme(toSaveToFile=True)
+
 def main(key1="", *args, **kwargs):
     L = getObjects()
     L = [v for v in L if key1 in v.name]
