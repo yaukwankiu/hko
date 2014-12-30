@@ -123,7 +123,7 @@ class Charts(object):
             return count
 
 
-    def fetchSingle(self, *args, **kwargs):
+    def fetchSingle(self, throttle=0.5, *args, **kwargs):
         url = self.urlPattern
         fileSuffix     = url[-3:]
         outputFolder = self.name + '/'
@@ -143,6 +143,7 @@ class Charts(object):
         except:
             print fileName, "not found!!!!"
             returnValue = 0
+        time.sleep(throttle)
         return returnValue
 
     def readme(self, toSaveToFile=False, saveMode='a'):
